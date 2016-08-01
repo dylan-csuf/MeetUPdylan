@@ -8,10 +8,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import goldteam.meetup.FriendListAdaptor;
 import goldteam.meetup.FriendListRequest;
 import goldteam.meetup.R;
 import goldteam.meetup.RequestInterface;
@@ -30,7 +33,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class FriendsFragment extends Fragment {
 
-    private ListView listView;
     private SharedPreferences pref;
 
     @Nullable
@@ -45,12 +47,12 @@ public class FriendsFragment extends Fragment {
 
     private void initViews(View v){
 
+
         getFriendList();
 
     }
 
     private void getFriendList(){
-
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
@@ -70,10 +72,19 @@ public class FriendsFragment extends Fragment {
         response.enqueue(new Callback<List<Friend>>() {
             @Override
             public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
+                ListView listView = (ListView) getActivity().findViewById(R.id.listView_friends);
                 List<Friend> friends = response.body();
+                ArrayList<Friend> friendList = new ArrayList<>();
+
+                // populate the list of friends
                 for(int i =0; i < friends.size(); i++){
-                    Log.d(friends.get(i).getEmail(), "lol");
+                    Friend friend = friends.get(i);
+                    friendList.add(friend);
                 }
+
+                ListAdapter customAdapter = new FriendListAdaptor(getActivity(), R.layout.item_listrow, friendList);
+                listView.setAdapter(customAdapter);
+
                 Log.d("this", "that");
             }
 
