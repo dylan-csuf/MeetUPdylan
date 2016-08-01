@@ -1,4 +1,4 @@
-package goldteam.meetup;
+package goldteam.meetup.fragments;
 
 /**
  * Created by c on 7/14/2016.
@@ -17,11 +17,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
-import goldteam.meetup.ServerResponse;
+import goldteam.meetup.statics.Constants;
+import goldteam.meetup.R;
+import goldteam.meetup.RequestInterface;
 import goldteam.meetup.ServerRequest;
-import goldteam.meetup.User;
-
-
+import goldteam.meetup.ServerResponse;
+import goldteam.meetup.entities.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -101,7 +102,7 @@ public class RegisterFragment extends Fragment  implements View.OnClickListener{
         ServerRequest request = new ServerRequest();
         request.setOperation(Constants.REGISTER_OPERATION);
         request.setUser(user);
-        Call<ServerResponse> response = requestInterface.operation(request);
+        Call<ServerResponse> response = requestInterface.userOperation(request);
 
         response.enqueue(new Callback<ServerResponse>() {
             @Override

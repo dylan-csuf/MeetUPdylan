@@ -1,4 +1,4 @@
-package goldteam.meetup;
+package goldteam.meetup.fragments;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -17,6 +17,13 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import goldteam.meetup.CalendarActivity;
+import goldteam.meetup.statics.Constants;
+import goldteam.meetup.R;
+import goldteam.meetup.RequestInterface;
+import goldteam.meetup.ServerRequest;
+import goldteam.meetup.ServerResponse;
+import goldteam.meetup.entities.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -120,7 +127,7 @@ public class LoginFragment extends android.app.Fragment implements View.OnClickL
         ServerRequest request = new ServerRequest();
         request.setOperation(Constants.LOGIN_OPERATION);
         request.setUser(user);
-        Call<ServerResponse> response = requestInterface.operation(request);
+        Call<ServerResponse> response = requestInterface.userOperation(request);
 
         response.enqueue(new Callback<ServerResponse>() {
             @Override
@@ -179,6 +186,13 @@ public class LoginFragment extends android.app.Fragment implements View.OnClickL
         Fragment profile = new ProfileFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_frame,profile);
+        ft.commit();
+    }
+
+    private void goToFriends(){
+        Fragment friends = new FriendsFragment();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment_frame,friends);
         ft.commit();
     }
 }

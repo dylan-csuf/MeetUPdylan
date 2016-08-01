@@ -1,4 +1,4 @@
-package goldteam.meetup;
+package goldteam.meetup.entities;
 
 /**
  * Created by c on 7/14/2016.

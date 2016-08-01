@@ -10,7 +10,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public class LoginActivity extends AppCompatActivity{
+import goldteam.meetup.fragments.FriendsFragment;
+import goldteam.meetup.fragments.LoginFragment;
+import goldteam.meetup.statics.Constants;
+
+public class MainActivity extends AppCompatActivity{
 
     private SharedPreferences pref;
 
@@ -27,7 +31,7 @@ public class LoginActivity extends AppCompatActivity{
     private void initFragment(){
         Fragment fragment;
         if(pref.getBoolean(Constants.IS_LOGGED_IN,false)){
-            fragment = new ProfileFragment();
+            fragment = new FriendsFragment();
         }else {
             fragment = new LoginFragment();
         }

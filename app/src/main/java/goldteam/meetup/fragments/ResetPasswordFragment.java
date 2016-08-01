@@ -1,4 +1,4 @@
-package goldteam.meetup;
+package goldteam.meetup.fragments;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -14,10 +14,15 @@ import android.widget.TextView;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 
+import goldteam.meetup.statics.Constants;
+import goldteam.meetup.R;
+import goldteam.meetup.RequestInterface;
+import goldteam.meetup.ServerRequest;
+import goldteam.meetup.ServerResponse;
+import goldteam.meetup.entities.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static retrofit2.converter.gson.GsonConverterFactory.*;
 
@@ -106,7 +111,7 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
         ServerRequest request = new ServerRequest();
         request.setOperation(Constants.RESET_PASSWORD_INITIATE);
         request.setUser(user);
-        Call<ServerResponse> response = requestInterface.operation(request);
+        Call<ServerResponse> response = requestInterface.userOperation(request);
 
         response.enqueue(new Callback<ServerResponse>() {
             @Override
@@ -161,7 +166,7 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
         ServerRequest request = new ServerRequest();
         request.setOperation(Constants.RESET_PASSWORD_FINISH);
         request.setUser(user);
-        Call<ServerResponse> response = requestInterface.operation(request);
+        Call<ServerResponse> response = requestInterface.userOperation(request);
 
         response.enqueue(new Callback<ServerResponse>() {
             @Override
