@@ -32,6 +32,7 @@ public class FriendListAdaptor extends ArrayAdapter<Friend> {
         Log.i(this.toString(), "getView");
 
         if (v == null) {
+            Log.i(this.toString(), "view is null");
             LayoutInflater vi;
             vi = LayoutInflater.from(getContext());
             v = vi.inflate(R.layout.item_listrow, null);
@@ -40,6 +41,7 @@ public class FriendListAdaptor extends ArrayAdapter<Friend> {
         Friend p = getItem(position);
 
         if (p != null) {
+
             TextView tt1 = (TextView) v.findViewById(R.id.id);
             TextView tt2 = (TextView) v.findViewById(R.id.email);
             TextView tt3 = (TextView) v.findViewById(R.id.name);
@@ -55,6 +57,8 @@ public class FriendListAdaptor extends ArrayAdapter<Friend> {
             if (tt3 != null) {
                 tt3.setText(p.getName());
             }
+        } else{
+            Log.i(this.toString(),"p is null, wtf");
         }
 
         return v;

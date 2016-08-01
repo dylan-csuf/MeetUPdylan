@@ -23,6 +23,8 @@ import goldteam.meetup.RequestInterface;
 import goldteam.meetup.ServerRequest;
 import goldteam.meetup.ServerResponse;
 import goldteam.meetup.entities.User;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -88,8 +90,13 @@ public class RegisterFragment extends Fragment  implements View.OnClickListener{
 
     private void registerProcess(String name, String email,String password){
 
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
+                .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

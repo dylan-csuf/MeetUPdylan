@@ -41,11 +41,16 @@ public class FriendsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_friends,container,false);
         pref = getActivity().getPreferences(0);
-        initViews(view);
         return view;
     }
 
-    private void initViews(View v){
+    @Override
+    public void onStart() {
+        super.onStart();
+        initViews();
+    }
+
+    private void initViews(){
 
 
         getFriendList();
@@ -72,20 +77,13 @@ public class FriendsFragment extends Fragment {
         response.enqueue(new Callback<List<Friend>>() {
             @Override
             public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
+                ArrayList<Friend> friends = null;
+                friends = (ArrayList)response.body();
                 ListView listView = (ListView) getActivity().findViewById(R.id.listView_friends);
-                List<Friend> friends = response.body();
-                ArrayList<Friend> friendList = new ArrayList<>();
-
-                // populate the list of friends
-                for(int i =0; i < friends.size(); i++){
-                    Friend friend = friends.get(i);
-                    friendList.add(friend);
-                }
-
-                ListAdapter customAdapter = new FriendListAdaptor(getActivity(), R.layout.item_listrow, friendList);
+                ListAdapter customAdapter = new FriendListAdaptor(getActivity(), R.layout.item_listrow, friends);
                 listView.setAdapter(customAdapter);
 
-                Log.d("this", "that");
+                Log.d(String.valueOf(friends.size()), "that");
             }
 
             @Override
