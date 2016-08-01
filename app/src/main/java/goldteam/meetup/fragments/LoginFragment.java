@@ -10,6 +10,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -18,12 +20,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import goldteam.meetup.CalendarActivity;
-import goldteam.meetup.statics.Constants;
 import goldteam.meetup.R;
 import goldteam.meetup.RequestInterface;
 import goldteam.meetup.ServerRequest;
 import goldteam.meetup.ServerResponse;
 import goldteam.meetup.entities.User;
+import goldteam.meetup.statics.Constants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -49,7 +51,16 @@ public class LoginFragment extends android.app.Fragment implements View.OnClickL
 
         View view = inflater.inflate(R.layout.fragment_login,container,false);
         initViews(view);
+        setHasOptionsMenu(false);
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        if (menu != null) {
+            menu.findItem(R.menu.menu).setVisible(false);
+
+        }
     }
 
     private void initViews(View view){

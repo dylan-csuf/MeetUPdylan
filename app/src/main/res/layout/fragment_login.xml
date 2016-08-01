@@ -8,7 +8,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="MeetUp"
+        android:text="Login"
         android:textSize="22sp"
         android:textAlignment="center"
         android:layout_marginBottom="20dp"
