@@ -62,13 +62,18 @@ public class FriendsFragment extends Fragment {
                 .build();
 
         RequestInterface requestInterface = retrofit.create(RequestInterface.class);
-        FriendListRequest friendListRequest = new FriendListRequest();
+        final FriendListRequest friendListRequest = new FriendListRequest();
         friendListRequest.setId(pref.getString(Constants.UNIQUE_ID,""));
+        friendListRequest.setOperation(Constants.GET_FRIEND_LIST);
         Call<List<Friend>> response = requestInterface.getList(friendListRequest);
 
         response.enqueue(new Callback<List<Friend>>() {
             @Override
             public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
+                List<Friend> friends = response.body();
+                for(int i =0; i < friends.size(); i++){
+                    Log.d(friends.get(i).getEmail(), "lol");
+                }
                 Log.d("this", "that");
             }
 
