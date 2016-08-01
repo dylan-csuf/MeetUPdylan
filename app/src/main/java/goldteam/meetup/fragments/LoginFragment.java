@@ -3,7 +3,6 @@ package goldteam.meetup.fragments;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -19,7 +18,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import goldteam.meetup.CalendarActivity;
 import goldteam.meetup.R;
 import goldteam.meetup.RequestInterface;
 import goldteam.meetup.ServerRequest;
@@ -39,7 +37,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginFragment extends android.app.Fragment implements View.OnClickListener{
 
-    private AppCompatButton btn_login, btn_test;
+    private AppCompatButton btn_login;
     private EditText et_email,et_password;
     private TextView tv_register;
     private TextView tv_forgot;
@@ -72,14 +70,12 @@ public class LoginFragment extends android.app.Fragment implements View.OnClickL
         tv_forgot = (TextView)view.findViewById(R.id.tv_forgot);
         et_email = (EditText)view.findViewById(R.id.et_email);
         et_password = (EditText)view.findViewById(R.id.et_password);
-        btn_test = (AppCompatButton) view.findViewById(R.id.btn_test);
 
         progress = (ProgressBar)view.findViewById(R.id.progress);
 
         btn_login.setOnClickListener(this);
         tv_register.setOnClickListener(this);
         tv_forgot.setOnClickListener(this);
-        btn_test.setOnClickListener(this);
     }
 
     @Override
@@ -89,10 +85,6 @@ public class LoginFragment extends android.app.Fragment implements View.OnClickL
 
             case R.id.tv_register:
                 goToRegister();
-                break;
-            case R.id.btn_test:
-                Log.i("Button","button pressed");
-                goToTest();
                 break;
 
             case R.id.tv_forgot:
@@ -186,11 +178,6 @@ public class LoginFragment extends android.app.Fragment implements View.OnClickL
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_frame,reset);
         ft.commit();
-    }
-    private void goToTest(){
-        Log.i("goToTest", "test");
-        Intent i = new Intent(getActivity(), CalendarActivity.class);
-        startActivity(i);
     }
     private void goToProfile(){
 
