@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -41,20 +42,13 @@ public class FriendsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_friends,container,false);
         pref = getActivity().getPreferences(0);
+        initViews();
         return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        initViews();
-    }
 
     private void initViews(){
-
-
         getFriendList();
-
     }
 
     private void getFriendList(){
@@ -82,6 +76,16 @@ public class FriendsFragment extends Fragment {
                 ListView listView = (ListView) getActivity().findViewById(R.id.listView_friends);
                 ListAdapter customAdapter = new FriendListAdaptor(getActivity(), R.layout.item_listrow, friends);
                 listView.setAdapter(customAdapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                            long arg3) {
+                        // TODO Auto-generated method stub
+                        Log.d("############","Items" );
+                    }
+
+                });
 
                 Log.d(String.valueOf(friends.size()), "that");
             }
