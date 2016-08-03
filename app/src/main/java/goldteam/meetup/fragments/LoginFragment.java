@@ -61,6 +61,10 @@ public class LoginFragment extends android.app.Fragment implements View.OnClickL
         }
     }
 
+    //public void setColor(int color) {
+    //    btn_login.setBackgroundColor(color);
+    //}
+
     private void initViews(View view){
 
         pref = getActivity().getPreferences(0);

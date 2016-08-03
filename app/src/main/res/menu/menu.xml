@@ -13,6 +13,9 @@
         android:title="Log out"
         app:showAsAction="never"/>
 
-
+    <item
+        android:id="@+id/Colors"
+        android:title="Colors"
+        app:showAsAction="never"/>
 
 </menu>
