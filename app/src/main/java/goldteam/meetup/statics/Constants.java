@@ -10,6 +10,13 @@ public class Constants {
     public static final String CHANGE_PASSWORD_OPERATION = "chgPass";
     public static final String GET_FRIEND_LIST = "get_friend_list";
     public static final String GET_PENDING_REQUESTS = "get_request_list";
+    public static final String SEND_FRIEND_REQUEST ="init_friend_request";
+    public static final String ACCEPT_FRIEND_REQUEST="accept_friend_request";
+    public static final String SEND_FRIEND_REQUEST_ID="init_friend_reqeust_id";
+
+    public static final String UPLOAD_BLOG = "get_blog"; //TODO: Figure out index's 2 'get blog' functions
+    public static final String GET_PICTURE = "get_picture";
+    public static final String GET_BLOGS = "get_blogs";
 
     public static final String SUCCESS = "success";
     public static final String FAILURE = "failure";
