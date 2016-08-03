@@ -71,8 +71,7 @@ public class FriendsFragment extends Fragment {
         response.enqueue(new Callback<List<Friend>>() {
             @Override
             public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
-                ArrayList<Friend> friends = null;
-                friends = (ArrayList)response.body();
+                final ArrayList<Friend> friends = (ArrayList)response.body();
                 ListView listView = (ListView) getActivity().findViewById(R.id.listView_friends);
                 ListAdapter customAdapter = new FriendListAdaptor(getActivity(), R.layout.item_listrow, friends);
                 listView.setAdapter(customAdapter);
@@ -81,8 +80,9 @@ public class FriendsFragment extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                             long arg3) {
-                        // TODO Auto-generated method stub
-                        Log.d("############","Items" );
+
+                        Log.d(this.toString(), friends.get(arg2).getName() );
+
                     }
 
                 });

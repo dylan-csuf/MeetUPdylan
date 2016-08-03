@@ -30,4 +30,5 @@ public class Constants {
 
     public static final String RESET_PASSWORD_INITIATE = "resPassReq";
     public static final String RESET_PASSWORD_FINISH = "resPass";
+
 }
