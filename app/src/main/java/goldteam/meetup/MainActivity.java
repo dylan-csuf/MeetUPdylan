@@ -12,6 +12,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -25,6 +26,7 @@ import com.pavelsikun.vintagechroma.IndicatorMode;
 import com.pavelsikun.vintagechroma.OnColorSelectedListener;
 import com.pavelsikun.vintagechroma.colormode.ColorMode;
 
+import goldteam.meetup.fragments.BlogFragment;
 import goldteam.meetup.fragments.FriendsFragment;
 import goldteam.meetup.fragments.LoginFragment;
 import goldteam.meetup.fragments.ProfileFragment;
@@ -32,8 +34,8 @@ import goldteam.meetup.statics.Constants;
 
 public class MainActivity extends AppCompatActivity{
 
-    private int color = Color.BLUE;  //default color of the user interface
     private SharedPreferences pref;
+    private int color = Color.BLUE;  //default color of the user interface
     Toolbar toolbar;
 
     @Override
@@ -44,6 +46,12 @@ public class MainActivity extends AppCompatActivity{
         initToolBar();
         initFragment();
 
+    }
+
+    @Override
+    protected void onStart() {
+        int color = ContextCompat.getColor(getApplicationContext(), R.color.primary);
+        super.onStart();
     }
 
     private void initFragment(){
@@ -62,8 +70,8 @@ public class MainActivity extends AppCompatActivity{
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+
         updateToolbar(color, color);
-        //LoginFragment.setColor(color);
 
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setNavigationOnClickListener(
@@ -112,6 +120,13 @@ public class MainActivity extends AppCompatActivity{
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_frame,fragment);
                 ft.commit();
+                return true;
+
+            case R.id.blog_view:
+                fragment = new BlogFragment();
+                FragmentTransaction blog_ft = getFragmentManager().beginTransaction();
+                blog_ft.replace(R.id.fragment_frame,fragment);
+                blog_ft.commit();
                 return true;
 
             case R.id.logout:

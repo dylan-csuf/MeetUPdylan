@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -61,9 +62,12 @@ public class LoginFragment extends android.app.Fragment implements View.OnClickL
         }
     }
 
-    //public void setColor(int color) {
-    //    btn_login.setBackgroundColor(color);
-    //}
+    public void setColor(int color) {
+        Log.d(this.toString(), "setColor");
+        Context context = getActivity().getApplicationContext();
+        ContextCompat.getColor(context,color);
+        btn_login.setBackgroundColor(color);
+    }
 
     private void initViews(View view){
 
