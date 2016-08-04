@@ -60,6 +60,24 @@ public class FriendsFragment extends Fragment {
         descartes.setName("Rene Descartes");
         philosophers.add(descartes);
 
+        Friend witt = new Friend();
+        witt.setId("e");
+        witt.setEmail("Tractatus@Logico.edu");
+        witt.setName("Ludwig Wittgenstein");
+        philosophers.add(witt);
+
+        Friend kant = new Friend();
+        kant.setId("f");
+        kant.setEmail("act_according_to@maxim.com");
+        kant.setName("Immanuel Kant");
+        philosophers.add(kant);
+
+        Friend marx = new Friend();
+        marx.setEmail("RichardStallman@gnu.org");
+        marx.setId("g");
+        marx.setName("Karl Marx");
+        philosophers.add(marx);
+
         Log.d(String.valueOf(philosophers.size()), "sizeof Friends");
 
         ListAdapter customAdapter = new FriendListAdaptor(getActivity(), R.layout.item_listrow, philosophers);

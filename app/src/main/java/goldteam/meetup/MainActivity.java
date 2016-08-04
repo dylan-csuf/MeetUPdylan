@@ -18,8 +18,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.pavelsikun.vintagechroma.ChromaDialog;
 import com.pavelsikun.vintagechroma.IndicatorMode;
@@ -74,7 +72,7 @@ public class MainActivity extends AppCompatActivity{
 
         updateToolbar(color, color);
 
-        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
+        /*toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setNavigationOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -83,7 +81,7 @@ public class MainActivity extends AppCompatActivity{
                     }
                 }
 
-        );
+        );*/
     }
 
     //updates the color of the user interface

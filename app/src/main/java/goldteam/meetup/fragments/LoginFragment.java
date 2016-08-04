@@ -116,14 +116,18 @@ public class LoginFragment extends android.app.Fragment implements View.OnClickL
 
         }
     }
-    private void loginProcess(String email,String password){
-        Nietzsche nietzsche = new Nietzsche();
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putBoolean(Constants.IS_LOGGED_IN,true);
-        editor.putString(Constants.EMAIL,nietzsche.getEmail());
-        editor.putString(Constants.NAME,nietzsche.getName());
-        editor.apply();
-        goToProfile();
+    private void loginProcess(String email,String password) {
+
+        if (email.equals("fred@weimar.com")) {
+            Nietzsche nietzsche = new Nietzsche();
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean(Constants.IS_LOGGED_IN, true);
+            editor.putString(Constants.EMAIL, nietzsche.getEmail());
+            editor.putString(Constants.NAME, nietzsche.getName());
+            editor.apply();
+            goToProfile();
+        }
+
     }
 
     private void goToRegister(){

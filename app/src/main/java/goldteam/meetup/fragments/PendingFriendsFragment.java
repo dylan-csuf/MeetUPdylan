@@ -1,6 +1,7 @@
 package goldteam.meetup.fragments;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -84,10 +85,19 @@ public class PendingFriendsFragment extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(position == 2){
-                    Log.d("lol", "xD");
-
+                if(position == 1) {
+                    Fragment fragment = new SocratesFragment();
+                    FragmentTransaction f2t = getFragmentManager().beginTransaction();
+                    f2t.replace(R.id.fragment_frame, fragment);
+                    f2t.commit();
+                }else {
+                    Fragment fragment = new BlankBlogFragmentNF();
+                    FragmentTransaction f1t = getFragmentManager().beginTransaction();
+                    f1t.replace(R.id.fragment_frame, fragment);
+                    f1t.commit();
                 }
+
+
             }
         });
     }
