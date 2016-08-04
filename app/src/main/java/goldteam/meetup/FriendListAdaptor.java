@@ -1,7 +1,6 @@
 package goldteam.meetup;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,14 +24,16 @@ public class FriendListAdaptor extends ArrayAdapter<Friend> {
         super(context, resource, items);
     }
 
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View v = convertView;
-        Log.i(this.toString(), "getView");
+        //Log.i(this.toString(), "getView");
 
         if (v == null) {
-            Log.i(this.toString(), "view is null");
+            //Log.i(this.toString(), "view is null");
             LayoutInflater vi;
             vi = LayoutInflater.from(getContext());
             v = vi.inflate(R.layout.item_listrow, null);
@@ -42,13 +43,9 @@ public class FriendListAdaptor extends ArrayAdapter<Friend> {
 
         if (p != null) {
 
-            TextView tt1 = (TextView) v.findViewById(R.id.id);
             TextView tt2 = (TextView) v.findViewById(R.id.email);
             TextView tt3 = (TextView) v.findViewById(R.id.name);
 
-            if (tt1 != null) {
-                tt1.setText(p.getId());
-            }
 
             if (tt2 != null) {
                 tt2.setText(p.getEmail());
@@ -58,7 +55,7 @@ public class FriendListAdaptor extends ArrayAdapter<Friend> {
                 tt3.setText(p.getName());
             }
         } else{
-            Log.i(this.toString(),"p is null, wtf");
+            //Log.i(this.toString(),"p is null, wtf");
         }
 
         return v;

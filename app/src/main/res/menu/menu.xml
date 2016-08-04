@@ -4,10 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:title="View Profile" app:showAsAction="never" android:id="@+id/profile_view"/>
 
+    <item android:title="View Friends" app:showAsAction="never" android:id="@+id/Friends"/>
+
+    <item android:title="View Pending Requests" app:showAsAction="never" android:id="@+id/Requests"/>
+
+
     <item android:title="View Blog" app:showAsAction="never" android:id="@+id/blog_view"/>
 
     <item android:title="Log out" app:showAsAction="never" android:id="@+id/logout"/>
 
     <item android:title="Colors" app:showAsAction="never" android:id="@+id/Colors"/>
+
 
 </menu>

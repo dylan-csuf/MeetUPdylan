@@ -20,15 +20,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import goldteam.meetup.R;
-import goldteam.meetup.RequestInterface;
-import goldteam.meetup.ServerRequest;
-import goldteam.meetup.ServerResponse;
-import goldteam.meetup.entities.User;
+import goldteam.meetup.debug.Nietzsche;
 import goldteam.meetup.statics.Constants;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by c on 7/14/2016.
@@ -96,7 +89,7 @@ public class LoginFragment extends android.app.Fragment implements View.OnClickL
                 break;
 
             case R.id.tv_forgot:
-                Log.i("Button","reset button pressed");
+                //Log.i("Button","reset button pressed");
                 goToForgot();
                 break;
 
@@ -124,51 +117,13 @@ public class LoginFragment extends android.app.Fragment implements View.OnClickL
         }
     }
     private void loginProcess(String email,String password){
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        RequestInterface requestInterface = retrofit.create(RequestInterface.class);
-
-        User user = new User();
-        user.setEmail(email);
-        user.setPassword(password);
-        ServerRequest request = new ServerRequest();
-        request.setOperation(Constants.LOGIN_OPERATION);
-        request.setUser(user);
-        Call<ServerResponse> response = requestInterface.userOperation(request);
-
-        response.enqueue(new Callback<ServerResponse>() {
-            @Override
-            public void onResponse(Call<ServerResponse> call, retrofit2.Response<ServerResponse> response) {
-
-                ServerResponse resp = response.body();
-                Snackbar.make(getView(), resp.getMessage(), Snackbar.LENGTH_LONG).show();
-
-                if(resp.getResult().equals(Constants.SUCCESS)){
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putBoolean(Constants.IS_LOGGED_IN,true);
-                    editor.putString(Constants.EMAIL,resp.getUser().getEmail());
-                    editor.putString(Constants.NAME,resp.getUser().getName());
-                    editor.putString(Constants.UNIQUE_ID,resp.getUser().getUnique_id());
-                    editor.apply();
-                    goToProfile();
-
-                }
-                progress.setVisibility(View.INVISIBLE);
-            }
-
-            @Override
-            public void onFailure(Call<ServerResponse> call, Throwable t) {
-
-                progress.setVisibility(View.INVISIBLE);
-                Log.d(Constants.TAG,"failed");
-                Snackbar.make(getView(), t.getLocalizedMessage(), Snackbar.LENGTH_LONG).show();
-
-            }
-        });
+        Nietzsche nietzsche = new Nietzsche();
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean(Constants.IS_LOGGED_IN,true);
+        editor.putString(Constants.EMAIL,nietzsche.getEmail());
+        editor.putString(Constants.NAME,nietzsche.getName());
+        editor.apply();
+        goToProfile();
     }
 
     private void goToRegister(){
@@ -176,12 +131,12 @@ public class LoginFragment extends android.app.Fragment implements View.OnClickL
         Fragment register = new RegisterFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_frame,register);
-        Log.i("Register","reg");
+        //Log.i("Register","reg");
         ft.commit();
     }
     private void goToForgot(){
 
-        Log.i("ResetPasswordFragment","forgot");
+        //.i("ResetPasswordFragment","forgot");
         Fragment reset = new ResetPasswordFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_frame,reset);
@@ -195,10 +150,4 @@ public class LoginFragment extends android.app.Fragment implements View.OnClickL
         ft.commit();
     }
 
-    private void goToFriends(){
-        Fragment friends = new FriendsFragment();
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.fragment_frame,friends);
-        ft.commit();
-    }
 }

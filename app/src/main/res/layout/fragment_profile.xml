@@ -7,9 +7,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/profile_pic"
+        android:src="@drawable/nietzsche"/>
+
     <TextView
         android:id="@+id/tv_name"
-        android:layout_marginTop="20dp"
         android:textSize="22sp"
         android:textColor="@color/accent"
         android:layout_width="wrap_content"
@@ -23,7 +28,16 @@
         android:layout_height="wrap_content" />
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_chg_password"
+        android:id="@+id/btn_view_blog"
+        android:layout_marginTop="40dp"
+        android:text="View Blog"
+        android:background="@color/primary"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_change_password"
         android:layout_marginTop="40dp"
         android:text="Change Password"
         android:background="@color/primary"
@@ -31,13 +45,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_logout"
-        android:layout_marginTop="20dp"
-        android:text="Logout"
-        android:background="@color/primary"
-        android:textColor="@android:color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>

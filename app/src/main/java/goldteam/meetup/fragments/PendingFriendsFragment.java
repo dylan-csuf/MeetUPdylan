@@ -3,95 +3,92 @@ package goldteam.meetup.fragments;
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import goldteam.meetup.FriendListAdaptor;
-import goldteam.meetup.FriendListRequest;
 import goldteam.meetup.R;
-import goldteam.meetup.RequestInterface;
 import goldteam.meetup.entities.Friend;
-import goldteam.meetup.statics.Constants;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by c on 7/31/2016.
  */
 public class PendingFriendsFragment extends Fragment {
 
-
     private SharedPreferences pref;
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_friends,container,false);
+        Log.d("View", view.toString());
         pref = getActivity().getPreferences(0);
+        initViews(view);
         return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        initViews();
+
+    private void initViews(View view){
+        ListView listView = (ListView) view.findViewById(R.id.listView_friends);
+
+        getFriendList(listView);
     }
 
-    private void initViews(){
+    private void getFriendList(ListView listView){
+        Log.i("@POST", "JSON:{\"operation\":\"get_pending_list\",\"\"id\":\"5797e1800fcdd3.11036548\"}");
+        ArrayList<Friend> philosophers = new ArrayList();
+
+        Friend lol = new Friend();
+        lol.setEmail("lol");
+        philosophers.add(lol);
+
+        Friend socrates = new Friend();
+        socrates.setEmail("sophistry@philosophicalNullPointer.net");
+        socrates.setId("a");
+        socrates.setName("Socrates");
+        philosophers.add(socrates);
+
+        Friend aristotle = new Friend();
+        aristotle.setEmail("lol@nannystate.gov");
+        aristotle.setId("b");
+        aristotle.setName("Aristotle");
+        philosophers.add(aristotle);
+
+        Friend plato = new Friend();
+        plato.setEmail("allegory@thecave.net");
+        plato.setId("a");
+        plato.setName("Plato");
+        philosophers.add(plato);
 
 
-        getFriendList();
 
-    }
+        Log.d(String.valueOf(philosophers.size()), "sizeof Friends");
 
-    private void getFriendList(){
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        ListAdapter customAdapter = new FriendListAdaptor(getActivity(), R.layout.item_listrow, philosophers);
+        if(listView == null){
+            Log.e("wtf", "listview = null");
+        }else {
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+            listView.setAdapter(customAdapter);
 
-        RequestInterface requestInterface = retrofit.create(RequestInterface.class);
-        final FriendListRequest friendListRequest = new FriendListRequest();
-        friendListRequest.setId(pref.getString(Constants.UNIQUE_ID,""));
-        friendListRequest.setOperation(Constants.GET_FRIEND_LIST);
-        Call<List<Friend>> response = requestInterface.getList(friendListRequest);
+        }
 
-        response.enqueue(new Callback<List<Friend>>() {
+        assert listView != null;
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
             @Override
-            public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
-                ArrayList<Friend> friends = null;
-                friends = (ArrayList)response.body();
-                ListView listView = (ListView) getActivity().findViewById(R.id.listView_friends);
-                ListAdapter customAdapter = new FriendListAdaptor(getActivity(), R.layout.item_listrow, friends);
-                listView.setAdapter(customAdapter);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 2){
+                    Log.d("lol", "xD");
 
-                Log.d(String.valueOf(friends.size()), "that");
-            }
-
-            @Override
-            public void onFailure(Call<List<Friend>> call, Throwable t) {
-                Log.d("damn we suck", "shieeet");
+                }
             }
         });
     }
 }
-

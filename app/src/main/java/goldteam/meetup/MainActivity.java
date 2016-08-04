@@ -29,6 +29,7 @@ import com.pavelsikun.vintagechroma.colormode.ColorMode;
 import goldteam.meetup.fragments.BlogFragment;
 import goldteam.meetup.fragments.FriendsFragment;
 import goldteam.meetup.fragments.LoginFragment;
+import goldteam.meetup.fragments.PendingFriendsFragment;
 import goldteam.meetup.fragments.ProfileFragment;
 import goldteam.meetup.statics.Constants;
 
@@ -133,6 +134,13 @@ public class MainActivity extends AppCompatActivity{
                 logout();
                 return true;
 
+            case R.id.Requests:
+                fragment = new PendingFriendsFragment();
+                FragmentTransaction lol = getFragmentManager().beginTransaction();
+                lol.replace(R.id.fragment_frame,fragment);
+                lol.commit();
+                return true;
+
             case R.id.Colors: //Option to change color of user interface
                 new ChromaDialog.Builder()
                         .initialColor(Color.BLUE)
@@ -149,6 +157,13 @@ public class MainActivity extends AppCompatActivity{
                         .create()
                         .show(getSupportFragmentManager(), "ChromaDialog");
 
+                return true;
+
+            case R.id.Friends:
+                fragment = new FriendsFragment();
+                FragmentTransaction f1t= getFragmentManager().beginTransaction();
+                f1t.replace(R.id.fragment_frame,fragment);
+                f1t.commit();
                 return true;
 
             default:

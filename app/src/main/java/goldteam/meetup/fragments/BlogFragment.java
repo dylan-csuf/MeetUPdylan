@@ -8,14 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import goldteam.meetup.R;
-import goldteam.meetup.RequestInterface;
-import goldteam.meetup.entities.Blog;
-import goldteam.meetup.statics.Constants;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import goldteam.meetup.debug.Nietzsche;
 
 /**
  * Created by Dylan on 8/2/2016.
@@ -69,24 +62,9 @@ public class BlogFragment extends android.app.Fragment {
 
     private void showBlog() {
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        RequestInterface requestInterface = retrofit.create(RequestInterface.class);
-        final BlogRequest blogRequest = new BlogRequest();
-        // TODO BE ABLE TO SET ID OF OTHER PEOPLE blogRequest.setId();
-        blogRequest.setOperation(Constants.GET_BLOGS);
-        Call<Blog> response = requestInterface.getBlog(blogRequest);
-
-        tv_title.setText("Test Title");
-        tv_date.setText("00/00/00");
-        tv_blog.setText("Blog test goes here. This is a blog");
+        Nietzsche nietzsche = new Nietzsche();
+        tv_title.setText(nietzsche.getTitle());
+        tv_date.setText(nietzsche.getDatetime());
+        tv_blog.setText(nietzsche.getBody());
     }
 }
